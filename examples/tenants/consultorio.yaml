@@ -1,0 +1,16 @@
+tenant:
+  slug: consultorio-ejemplo
+  name: Consultorio Alameda
+  timezone: America/Mexico_City
+  address: Avenida Alameda 24, Ciudad de México
+  owner: {email: consultorio@example.test}
+  features: {appointments: true, orders: false}
+appointments:
+  weekly_hours:
+    mon: [["09:00", "14:00"], ["16:00", "19:00"]]
+    tue: [["09:00", "14:00"], ["16:00", "19:00"]]
+    wed: [["09:00", "14:00"], ["16:00", "19:00"]]
+    thu: [["09:00", "14:00"], ["16:00", "19:00"]]
+    fri: [["09:00", "14:00"]]
+  services:
+    - {code: consulta, name: Consulta, minutes: 30, buffer_minutes: 10, price_mxn: 400}

@@ -1,0 +1,25 @@
+tenant:
+  slug: taqueria-ejemplo
+  name: Taquería La Esquina
+  timezone: America/Mexico_City
+  address: Calle Centro 8, Ciudad de México
+  owner: {email: tacos@example.test}
+  features: {appointments: false, orders: true}
+orders:
+  accepts: [pickup, delivery]
+  delivery_note: Solo zona centro. Costo de envío $30.
+  delivery_fee_mxn: 30
+  min_order_mxn: 80
+  hours:
+    mon: [["00:00", "23:59"]]
+    tue: [["00:00", "23:59"]]
+    wed: [["00:00", "23:59"]]
+    thu: [["00:00", "23:59"]]
+    fri: [["00:00", "23:59"]]
+    sat: [["00:00", "23:59"]]
+    sun: [["00:00", "23:59"]]
+  items:
+    - {code: taco_pastor, name: Taco al pastor, price_mxn: 18, available: true}
+    - {code: quesadilla, name: Quesadilla, price_mxn: 35, available: true}
+    - {code: agua, name: Agua fresca, price_mxn: 25, available: true}
+    - {code: especial, name: Especial del día, price_mxn: 50, available: false}

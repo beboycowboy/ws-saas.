@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="workspace">
+  <aside class="sidebar">
+    <div class="eyebrow">TU LABORATORIO</div><h1>Una conversación.<br>Todo conectado.</h1>
+    <p class="muted">Prueba citas, pedidos y atención humana con negocios de ejemplo.</p>
+    <nav><a class="active" href="/dev/inbox">↗ Simulador de chat</a><a href="/dev/notifications">◎ Avisos al negocio</a><a href="/dev/docs">⌘ Referencia de API</a></nav>
+    <div class="local-note"><span class="dot"></span> 100 % local<p>Los mensajes y avisos se guardan aquí. No se envían a WhatsApp.</p></div>
+  </aside>
+  <section class="content">
+    <div class="section-head"><div><div class="eyebrow">01 / CONVERSACIÓN</div><h2>Prueba el recorrido completo</h2></div><span class="badge">ScriptedLLM</span></div>
+    {% if selected %}
+    <div class="controls"><label>Negocio<select id="tenant">{% for t in tenants %}<option value="{{ t.slug }}" {% if t.slug==selected.slug %}selected{% endif %}>{{ t.name }}</option>{% endfor %}</select></label><label>Contacto de prueba<input id="contact" value="cliente-demo" maxlength="200"></label></div>
+    <div class="chat-card"><div class="chat-top"><span class="avatar">b.</span><div><strong>{{ selected.name }}</strong><small id="conversation-state">Listo para conversar</small></div><span class="dot"></span></div>
+    <div class="messages" id="messages" aria-live="polite"><div class="empty"><div class="empty-symbol">✳</div><h3>Tu próxima conversación empieza aquí</h3><p>Escribe «menú» o usa uno de los ejemplos de abajo.</p></div></div>
+    <form id="chat-form"><label class="sr-only" for="message">Mensaje</label><textarea id="message" rows="2" placeholder="Escribe como lo haría tu cliente…" maxlength="4000" required></textarea><button type="submit">Enviar ↗</button></form><div class="chat-options"><label><input type="checkbox" id="owner-mode"> Simular mensaje del dueño</label><span id="send-status" role="status"></span></div></div>
+    <div class="help-grid">{% if example %}<article><span class="eyebrow">CITAS</span><h3>Reservar y confirmar</h3><code>horarios {{ example.code }} {{ example.date }}</code><code>agendar {{ example.code }} {{ example.time }} Ana</code><code>confirmar</code></article>{% endif %}{% if selected.config_json.tenant.features.orders %}<article><span class="eyebrow">PEDIDOS</span><h3>Armar un pedido</h3><code>agregar taco_pastor 5</code><code>pedido pickup</code><code>confirmar</code></article>{% endif %}<article><span class="eyebrow">ATENCIÓN HUMANA</span><h3>Cambiar quién atiende</h3><code>humano</code><p class="fine muted">El bot se silencia mientras atiende el dueño. Escribe «menú» para volver al bot.</p></article></div>
+    <p class="muted fine">También: «mis citas», «ver pedido», «quitar taco_pastor 1», «humano», «menú» y «BAJA». El simulador utiliza comandos deterministas; la calidad conversacional se evaluará al conectar un LLM.</p>
+    {% if tokens.get(selected.slug) %}<a class="text-link" href="/a/{{ tokens[selected.slug].agenda_token }}">Abrir agenda del negocio ↗</a>{% endif %}
+    {% else %}<div class="empty"><h2>Primero crea los negocios de ejemplo</h2><code>docker compose exec app seed demo</code></div>{% endif %}
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,9 @@
+tenant: taqueria-ejemplo
+turns:
+  - say: menú
+  - say: agregar taco_pastor 5
+    expect_status: draft
+  - say: pedido pickup
+    expect_status: draft
+  - say: confirmar
+    expect_status: placed

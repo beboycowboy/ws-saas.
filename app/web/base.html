@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Barrio · Laboratorio local{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css">
+  {% if csrf %}<meta name="dev-csrf" content="{{ csrf }}">{% endif %}
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="top"><a class="brand" href="/">barrio<span>●</span></a><span class="label">CITAS + PEDIDOS</span><span class="environment">Entorno local</span></header>
+  {% block body %}{% endblock %}
+  <footer>Hecho para negocios de barrio. <a href="/privacy">Privacidad</a></footer>
+</body>
+</html>

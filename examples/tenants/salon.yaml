@@ -1,0 +1,21 @@
+tenant:
+  slug: salon-ejemplo
+  name: Salón Jacaranda
+  timezone: America/Mexico_City
+  address: Calle Jardín 15, Ciudad de México
+  owner: {email: salon@example.test}
+  features: {appointments: true, orders: false}
+appointments:
+  weekly_hours:
+    mon: [["10:00", "19:00"]]
+    tue: [["10:00", "19:00"]]
+    wed: [["10:00", "19:00"]]
+    thu: [["10:00", "19:00"]]
+    fri: [["10:00", "19:00"]]
+    sat: [["10:00", "15:00"]]
+  closed_dates: ["2026-12-25"]
+  services:
+    - {code: corte, name: Corte de cabello, minutes: 45, buffer_minutes: 5, price_mxn: 150}
+    - {code: peinado, name: Peinado, minutes: 60, buffer_minutes: 10, price_mxn: 300}
+faq:
+  - {q: "¿Aceptan tarjeta?", a: "Sí, en el local."}

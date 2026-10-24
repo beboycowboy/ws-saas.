@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: barrio
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d barrio"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  app:
+    build: .
+    command: ["bot", "api", "--host", "0.0.0.0"]
+    ports:
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    environment: &local_env
+      APP_ENV: dev
+      PUBLIC_BASE_URL: "http://127.0.0.1:${APP_PORT:-8000}"
+      DATABASE_URL_ADMIN: postgresql://postgres@postgres:5432/barrio
+      DATABASE_URL_APP: postgresql://ws_app@postgres:5432/barrio
+      DATABASE_URL_BACKUP: postgresql://ws_backup@postgres:5432/barrio
+    volumes:
+      - runtime_data:/srv/.runtime
+    depends_on:
+      postgres:
+        condition: service_healthy
+  worker:
+    build: .
+    command: ["bot", "worker"]
+    environment: *local_env
+    volumes:
+      - runtime_data:/srv/.runtime
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  postgres_data:
+  runtime_data:
