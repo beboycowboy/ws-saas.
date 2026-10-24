@@ -59,6 +59,6 @@ La suite se ejecutó con Python 3.13 en Windows y PostgreSQL 16. La imagen usa P
 
 Docker se verificó con un daemon aislado en WSL y puertos 18000/15432, para coexistir con el entorno nativo 8000/5432. Se construyó la imagen con `docker build --network host` y se levantó con `docker compose up -d --no-build`. Se corrigió la resolución DNS del entorno instalando su requisito iptables y reiniciando ese daemon. No se necesitó modificar el código de conexión a BD.
 
-Se revisó visualmente el simulador y se creó un pedido desde el navegador. La revisión final del navegador integrado no pudo adjuntar su pestaña; las acciones y páginas también tienen pruebas HTTP y de BD. No se afirma una segunda revisión visual completa después de ese fallo de la herramienta.
+Se revisaron visualmente el simulador, la bandeja y la agenda en una vista estrecha. El pedido creado desde el navegador aparece aceptado por $90, con ETA de 30 minutos, tanto en avisos como en la agenda. Se corrigieron etiquetas de estado en español y la presentación de resúmenes antiguos sin contadores; después se repitió la prueba HTTP de páginas y CSRF. Captura local: `.runtime/screenshots/pedido-aceptado.png` (datos de demostración, excluida de Git).
 
 Las evals Fake verifican la tubería, no calidad conversacional de un LLM real, formatos de WaSender ni eficacia contra bloqueos de WhatsApp. El piloto comercial, conexiones reales y despliegue público pertenecen a la siguiente etapa definida en la arquitectura.
